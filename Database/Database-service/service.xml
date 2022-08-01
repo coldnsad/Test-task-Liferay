@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.3.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_3_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="com.db">
+	<namespace>db</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity local-service="true" name="PositionType" remote-service="true" uuid="false">
+
+		<column name="id" primary="true" type="long" />
+		<column name="name" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Field1" return-type="Collection">
+			<finder-column name="name" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+
+</service-builder>

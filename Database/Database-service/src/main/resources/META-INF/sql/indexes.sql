@@ -1,0 +1,1 @@
+create index IX_DD6CB149 on db_PositionType (name[$COLUMN_LENGTH:75$]);

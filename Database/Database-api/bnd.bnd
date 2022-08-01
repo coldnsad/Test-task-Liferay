@@ -1,0 +1,12 @@
+Bundle-Name: Database-api
+Bundle-SymbolicName: com.db.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.db.exception,\
+	com.db.model,\
+	com.db.service,\
+	com.db.service.persistence
+-check: EXPORTS
+-consumer-policy: ${replacestring;${range;[==,==]};.*,(.*)];$1}
+-includeresource: META-INF/service.xml=../Database-service/service.xml
+-provider-policy: ${replacestring;${range;[==,==]};.*,(.*)];$1}
