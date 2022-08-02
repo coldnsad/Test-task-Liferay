@@ -14,13 +14,13 @@ import org.osgi.service.component.annotations.Reference;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
-@Component(
+/*@Component(
         immediate = true,
         property = {
                 "javax.portlet.name=" + PositionTypeControllerPortletKeys.POSITIONTYPECONTROLLER,
                 "mvc.command.name=savePosition" },
         service = MVCActionCommand.class
-)
+)*/
 
 public class SaveActionMvcCommand extends BaseMVCActionCommand {
 
@@ -41,6 +41,9 @@ public class SaveActionMvcCommand extends BaseMVCActionCommand {
         PositionType positionType = PositionTypeLocalServiceUtil.
                 createPositionType(CounterLocalServiceUtil.increment(PositionType.class.getName()));
         positionType.setName(name);
+
+        //Get all PositionTypes
+        //PositionTypeLocalServiceUtil.getPositionTypes(0, PositionTypeLocalServiceUtil.getPositionTypesCount());
 
         PositionTypeLocalServiceUtil.addPositionType(positionType);
         System.out.println("Position type added");

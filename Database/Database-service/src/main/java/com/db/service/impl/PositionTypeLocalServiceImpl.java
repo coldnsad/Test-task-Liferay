@@ -30,5 +30,5 @@ import org.osgi.service.component.annotations.Component;
 public class PositionTypeLocalServiceImpl
 	extends PositionTypeLocalServiceBaseImpl {
 
-	//dq
+	//dynamic query here
 }

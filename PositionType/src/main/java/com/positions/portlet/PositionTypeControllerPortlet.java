@@ -2,14 +2,12 @@ package com.positions.portlet;
 
 import com.db.model.PositionType;
 import com.db.service.PositionTypeLocalServiceUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.positions.constants.PositionTypeControllerPortletKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
-import javax.portlet.Portlet;
-import javax.portlet.PortletException;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import javax.portlet.*;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -38,5 +36,11 @@ public class PositionTypeControllerPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		super.doView(renderRequest, renderResponse);
+
+
+	}
+
+	public void savePosition(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
+		System.out.println("Received in the controller(savePosition)");
 	}
 }

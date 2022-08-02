@@ -4,6 +4,8 @@
 <service-builder dependency-injector="ds" package-path="com.db">
 	<namespace>db</namespace>
 	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+
+	<!--Position types-->
 	<entity local-service="true" name="PositionType" remote-service="true" uuid="false">
 
 		<column name="id" primary="true" type="long" />
@@ -19,6 +21,35 @@
 
 		<finder name="Field1" return-type="Collection">
 			<finder-column name="name" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+
+	<!--Employee-->
+	<entity local-service="true" name="Employee" remote-service="true" uuid="false">
+
+		<column name="id" primary="true" type="long" />
+		<column name="firstname" type="String" />
+		<column name="lastname" type="String" />
+		<column name="patronymic" type="String" />
+		<column name="birthdate" type="Date" />
+		<column name="gender" type="boolean" />
+		<column name="positionTypesId" type="long" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Field1" return-type="Collection">
+			<finder-column name="firstname" />
 		</finder>
 
 		<!-- References -->

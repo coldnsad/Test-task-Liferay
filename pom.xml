@@ -11,6 +11,7 @@
     <module>themes</module>
     <module>Database</module>
     <module>PositionType</module>
+    <module>Employee</module>
   </modules>
   <properties>
     <liferay.repository.url>https://repository-cdn.liferay.com/nexus/content/groups/public/</liferay.repository.url>

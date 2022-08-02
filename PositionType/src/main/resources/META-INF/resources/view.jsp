@@ -6,7 +6,7 @@
 
 <aui:form name="fm" action="${savePositionURL}">
 
-    <aui:input name="name"></aui:input>
+    <aui:input name="name" type="text"></aui:input>
 
     <aui:button-row>
         <aui:button cssClass="btn bnt-primary" type="submit" />

@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="com.db.model.Employee">
+		<field name="id" type="long" />
+		<field name="firstname" type="String" />
+		<field name="lastname" type="String" />
+		<field name="patronymic" type="String" />
+		<field name="birthdate" type="Date" />
+		<field name="gender" type="boolean" />
+		<field name="positionTypesId" type="long" />
+	</model>
 	<model name="com.db.model.PositionType">
 		<field name="id" type="long" />
 		<field name="name" type="String" />

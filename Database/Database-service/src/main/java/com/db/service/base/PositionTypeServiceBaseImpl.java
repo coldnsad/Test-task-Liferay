@@ -17,6 +17,7 @@ package com.db.service.base;
 import com.db.model.PositionType;
 import com.db.service.PositionTypeService;
 import com.db.service.PositionTypeServiceUtil;
+import com.db.service.persistence.EmployeePersistence;
 import com.db.service.persistence.PositionTypePersistence;
 
 import com.liferay.portal.aop.AopService;
@@ -132,6 +133,9 @@ public abstract class PositionTypeServiceBaseImpl
 			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
+
+	@Reference
+	protected EmployeePersistence employeePersistence;
 
 	@Reference
 	protected com.db.service.PositionTypeLocalService positionTypeLocalService;
