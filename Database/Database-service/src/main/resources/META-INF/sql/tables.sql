@@ -4,7 +4,7 @@ create table db_Employee (
 	lastname VARCHAR(75) null,
 	patronymic VARCHAR(75) null,
 	birthdate DATE null,
-	gender BOOLEAN,
+	gender VARCHAR(75) null,
 	positionTypesId LONG
 );
 

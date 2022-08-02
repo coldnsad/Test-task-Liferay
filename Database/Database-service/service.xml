@@ -37,7 +37,7 @@
 		<column name="lastname" type="String" />
 		<column name="patronymic" type="String" />
 		<column name="birthdate" type="Date" />
-		<column name="gender" type="boolean" />
+		<column name="gender" type="String" />
 		<column name="positionTypesId" type="long" />
 
 		<!-- Order -->

@@ -7,7 +7,7 @@
 		<field name="lastname" type="String" />
 		<field name="patronymic" type="String" />
 		<field name="birthdate" type="Date" />
-		<field name="gender" type="boolean" />
+		<field name="gender" type="String" />
 		<field name="positionTypesId" type="long" />
 	</model>
 	<model name="com.db.model.PositionType">
