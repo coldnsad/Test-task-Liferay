@@ -1,28 +1,29 @@
 <%@ include file="/init.jsp" %>
 
+<portlet:renderURL var="employeeCreateRender">
+    <portlet:param name="mvcRenderCommandName" value="/employee/create"/>
+</portlet:renderURL>
 
-<portlet:actionURL name="saveEmployee" var="saveEmployeeURL"></portlet:actionURL>
+<liferay-ui:search-container
+    emptyResultsMessage="there-are-no-employees-yet"
+    delta="2" total="${totalEmployees}"
+    deltaConfigurable="false">
 
-<h1>Add data to Position Type Table</h1>
-<aui:form name="fm" action="${saveEmployeeURL}">
+    <liferay-ui:search-container-results results="${employees}" />
+    <liferay-ui:search-container-row
+        className="com.db.model.Employee"
+        keyProperty="id"
+        modelVar="entry"
+        escapedModel="<%=true%>">
 
-    <aui:input name="lastName"  type="text"></aui:input>
-    <aui:input name="firstName" type="text"></aui:input>
-    <aui:input name="patronymic"  label="Patronymic" type="text"></aui:input>
-    <aui:input name="birthday"  type="date"></aui:input>
+        <liferay-ui:search-container-column-text property="lastname"  />
+        <liferay-ui:search-container-column-text property="firstname" />
+        <liferay-ui:search-container-column-text property="patronymic" />
+        <liferay-ui:search-container-column-text name="birthdate" value="<%= entry.formatDate() %>" />
+        <liferay-ui:search-container-column-text property="gender" />
+        <liferay-ui:search-container-column-text name="Position" value="<%= entry.showPosition() %>"/>
+    </liferay-ui:search-container-row>
+    <liferay-ui:search-iterator />
+</liferay-ui:search-container>
 
-    <aui:select name="position" label="Position">
-        <c:forEach var="current" items="${positionTypes}">
-            <aui:option value="${current.key}">${current.value}</aui:option>
-        </c:forEach>
-    </aui:select>
-
-     <aui:select name="gender" label="Gender">
-        <aui:option value="male">Male</aui:option>
-        <aui:option value="female">Female</aui:option>
-    </aui:select>
-
-    <aui:button-row>
-        <aui:button cssClass="btn bnt-primary" type="submit" />
-    </aui:button-row>
-</aui:form>
+<a href="${employeeCreateRender}">Create employee</a>

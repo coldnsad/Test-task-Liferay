@@ -43,56 +43,19 @@ public class EmployeeControllerPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 
-		List<PositionType> positionTypeList = PositionTypeLocalServiceUtil.
-				getPositionTypes(0,PositionTypeLocalServiceUtil.getPositionTypesCount());
+		int delta = ParamUtil.getInteger(renderRequest, "delta");
+		int currentPage = ParamUtil.getInteger(renderRequest, "cur");
 
-		Map<Long, String> positionTypesMap = new HashMap<>();
-		for (PositionType positionType:
-			 positionTypeList) {
-			positionTypesMap.put(positionType.getId(), positionType.getName());
-		}
+		//System.out.println(delta + "-" + currentPage);
 
-		//Debug
-		for (Map.Entry<Long,String> pair:
-				positionTypesMap.entrySet()) {
-			System.out.println(pair.getKey() + ":" + pair.getValue());
-		}
-		//END Debug
+		int to = delta == 0 ? 2 : currentPage * delta;
+		int from = delta == 0 ? 0 : to - delta;
 
-		renderRequest.setAttribute("positionTypes", positionTypesMap);
+		//System.out.println(from + "-" + to);
+
+		renderRequest.setAttribute("totalEmployees", EmployeeLocalServiceUtil.getEmployeesCount());
+		renderRequest.setAttribute("employees", EmployeeLocalServiceUtil.getEmployees(from,to));
 
 		super.doView(renderRequest, renderResponse);
-	}
-
-	public void saveEmployee(ActionRequest actionRequest, ActionResponse actionResponse){
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-		String firstName  = ParamUtil.getString(actionRequest, "firstName");
-		String lastName   = ParamUtil.getString(actionRequest, "lastName");
-		String patronymic = ParamUtil.getString(actionRequest, "patronymic");
-		String birthdayString = ParamUtil.getString(actionRequest,   "birthday");
-		Date birthday = null;
-		try {
-			birthday = sdf.parse(birthdayString);
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
-		Long positionId   = ParamUtil.getLong(actionRequest,   "position");
-		String gender     = ParamUtil.getString(actionRequest, "gender");
-
-		Employee employee = EmployeeLocalServiceUtil.createEmployee(CounterLocalServiceUtil.
-				increment(Employee.class.getName()));
-
-		employee.setLastname(lastName);
-		employee.setFirstname(firstName);
-		employee.setPatronymic(patronymic);
-		employee.setBirthdate(birthday);
-		employee.setPositionTypesId(positionId);
-		employee.setGender(gender);
-
-		EmployeeLocalServiceUtil.addEmployee(employee);
-
-		System.out.println(firstName + " - " + lastName + " - " + patronymic + " - " + sdf.format(birthday) + " - " + positionId+ " - " + gender);
 	}
 }

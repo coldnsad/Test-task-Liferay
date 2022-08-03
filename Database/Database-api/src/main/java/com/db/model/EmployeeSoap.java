@@ -34,8 +34,8 @@ public class EmployeeSoap implements Serializable {
 		EmployeeSoap soapModel = new EmployeeSoap();
 
 		soapModel.setId(model.getId());
-		soapModel.setFirstname(model.getFirstname());
 		soapModel.setLastname(model.getLastname());
+		soapModel.setFirstname(model.getFirstname());
 		soapModel.setPatronymic(model.getPatronymic());
 		soapModel.setBirthdate(model.getBirthdate());
 		soapModel.setGender(model.getGender());
@@ -101,20 +101,20 @@ public class EmployeeSoap implements Serializable {
 		_id = id;
 	}
 
-	public String getFirstname() {
-		return _firstname;
-	}
-
-	public void setFirstname(String firstname) {
-		_firstname = firstname;
-	}
-
 	public String getLastname() {
 		return _lastname;
 	}
 
 	public void setLastname(String lastname) {
 		_lastname = lastname;
+	}
+
+	public String getFirstname() {
+		return _firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		_firstname = firstname;
 	}
 
 	public String getPatronymic() {
@@ -150,8 +150,8 @@ public class EmployeeSoap implements Serializable {
 	}
 
 	private long _id;
-	private String _firstname;
 	private String _lastname;
+	private String _firstname;
 	private String _patronymic;
 	private Date _birthdate;
 	private String _gender;

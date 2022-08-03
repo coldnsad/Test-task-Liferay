@@ -14,8 +14,12 @@
 
 package com.db.model.impl;
 
+import com.db.model.PositionType;
+import com.db.service.PositionTypeLocalServiceUtil;
+
 /**
  * @author Brian Wing Shun Chan
  */
 public class PositionTypeImpl extends PositionTypeBaseImpl {
+
 }

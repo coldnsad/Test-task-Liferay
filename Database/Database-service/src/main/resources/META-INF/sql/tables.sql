@@ -1,7 +1,7 @@
 create table db_Employee (
 	id_ LONG not null primary key,
-	firstname VARCHAR(75) null,
 	lastname VARCHAR(75) null,
+	firstname VARCHAR(75) null,
 	patronymic VARCHAR(75) null,
 	birthdate DATE null,
 	gender VARCHAR(75) null,

@@ -43,8 +43,8 @@ public class EmployeeWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("id", getId());
-		attributes.put("firstname", getFirstname());
 		attributes.put("lastname", getLastname());
+		attributes.put("firstname", getFirstname());
 		attributes.put("patronymic", getPatronymic());
 		attributes.put("birthdate", getBirthdate());
 		attributes.put("gender", getGender());
@@ -61,16 +61,16 @@ public class EmployeeWrapper
 			setId(id);
 		}
 
-		String firstname = (String)attributes.get("firstname");
-
-		if (firstname != null) {
-			setFirstname(firstname);
-		}
-
 		String lastname = (String)attributes.get("lastname");
 
 		if (lastname != null) {
 			setLastname(lastname);
+		}
+
+		String firstname = (String)attributes.get("firstname");
+
+		if (firstname != null) {
+			setFirstname(firstname);
 		}
 
 		String patronymic = (String)attributes.get("patronymic");
@@ -96,6 +96,11 @@ public class EmployeeWrapper
 		if (positionTypesId != null) {
 			setPositionTypesId(positionTypesId);
 		}
+	}
+
+	@Override
+	public String formatDate() {
+		return model.formatDate();
 	}
 
 	/**
@@ -261,6 +266,11 @@ public class EmployeeWrapper
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		model.setPrimaryKey(primaryKey);
+	}
+
+	@Override
+	public String showPosition() {
+		return model.showPosition();
 	}
 
 	@Override

@@ -71,8 +71,8 @@ public class EmployeeModelImpl
 	public static final String TABLE_NAME = "db_Employee";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"id_", Types.BIGINT}, {"firstname", Types.VARCHAR},
-		{"lastname", Types.VARCHAR}, {"patronymic", Types.VARCHAR},
+		{"id_", Types.BIGINT}, {"lastname", Types.VARCHAR},
+		{"firstname", Types.VARCHAR}, {"patronymic", Types.VARCHAR},
 		{"birthdate", Types.TIMESTAMP}, {"gender", Types.VARCHAR},
 		{"positionTypesId", Types.BIGINT}
 	};
@@ -82,8 +82,8 @@ public class EmployeeModelImpl
 
 	static {
 		TABLE_COLUMNS_MAP.put("id_", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("firstname", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("lastname", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("firstname", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("patronymic", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("birthdate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("gender", Types.VARCHAR);
@@ -91,7 +91,7 @@ public class EmployeeModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table db_Employee (id_ LONG not null primary key,firstname VARCHAR(75) null,lastname VARCHAR(75) null,patronymic VARCHAR(75) null,birthdate DATE null,gender VARCHAR(75) null,positionTypesId LONG)";
+		"create table db_Employee (id_ LONG not null primary key,lastname VARCHAR(75) null,firstname VARCHAR(75) null,patronymic VARCHAR(75) null,birthdate DATE null,gender VARCHAR(75) null,positionTypesId LONG)";
 
 	public static final String TABLE_SQL_DROP = "drop table db_Employee";
 
@@ -148,8 +148,8 @@ public class EmployeeModelImpl
 		Employee model = new EmployeeImpl();
 
 		model.setId(soapModel.getId());
-		model.setFirstname(soapModel.getFirstname());
 		model.setLastname(soapModel.getLastname());
+		model.setFirstname(soapModel.getFirstname());
 		model.setPatronymic(soapModel.getPatronymic());
 		model.setBirthdate(soapModel.getBirthdate());
 		model.setGender(soapModel.getGender());
@@ -278,12 +278,12 @@ public class EmployeeModelImpl
 		attributeGetterFunctions.put("id", Employee::getId);
 		attributeSetterBiConsumers.put(
 			"id", (BiConsumer<Employee, Long>)Employee::setId);
-		attributeGetterFunctions.put("firstname", Employee::getFirstname);
-		attributeSetterBiConsumers.put(
-			"firstname", (BiConsumer<Employee, String>)Employee::setFirstname);
 		attributeGetterFunctions.put("lastname", Employee::getLastname);
 		attributeSetterBiConsumers.put(
 			"lastname", (BiConsumer<Employee, String>)Employee::setLastname);
+		attributeGetterFunctions.put("firstname", Employee::getFirstname);
+		attributeSetterBiConsumers.put(
+			"firstname", (BiConsumer<Employee, String>)Employee::setFirstname);
 		attributeGetterFunctions.put("patronymic", Employee::getPatronymic);
 		attributeSetterBiConsumers.put(
 			"patronymic",
@@ -323,6 +323,26 @@ public class EmployeeModelImpl
 
 	@JSON
 	@Override
+	public String getLastname() {
+		if (_lastname == null) {
+			return "";
+		}
+		else {
+			return _lastname;
+		}
+	}
+
+	@Override
+	public void setLastname(String lastname) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_lastname = lastname;
+	}
+
+	@JSON
+	@Override
 	public String getFirstname() {
 		if (_firstname == null) {
 			return "";
@@ -348,26 +368,6 @@ public class EmployeeModelImpl
 	@Deprecated
 	public String getOriginalFirstname() {
 		return getColumnOriginalValue("firstname");
-	}
-
-	@JSON
-	@Override
-	public String getLastname() {
-		if (_lastname == null) {
-			return "";
-		}
-		else {
-			return _lastname;
-		}
-	}
-
-	@Override
-	public void setLastname(String lastname) {
-		if (_columnOriginalValues == Collections.EMPTY_MAP) {
-			_setColumnOriginalValues();
-		}
-
-		_lastname = lastname;
 	}
 
 	@JSON
@@ -497,8 +497,8 @@ public class EmployeeModelImpl
 		EmployeeImpl employeeImpl = new EmployeeImpl();
 
 		employeeImpl.setId(getId());
-		employeeImpl.setFirstname(getFirstname());
 		employeeImpl.setLastname(getLastname());
+		employeeImpl.setFirstname(getFirstname());
 		employeeImpl.setPatronymic(getPatronymic());
 		employeeImpl.setBirthdate(getBirthdate());
 		employeeImpl.setGender(getGender());
@@ -588,20 +588,20 @@ public class EmployeeModelImpl
 
 		employeeCacheModel.id = getId();
 
-		employeeCacheModel.firstname = getFirstname();
-
-		String firstname = employeeCacheModel.firstname;
-
-		if ((firstname != null) && (firstname.length() == 0)) {
-			employeeCacheModel.firstname = null;
-		}
-
 		employeeCacheModel.lastname = getLastname();
 
 		String lastname = employeeCacheModel.lastname;
 
 		if ((lastname != null) && (lastname.length() == 0)) {
 			employeeCacheModel.lastname = null;
+		}
+
+		employeeCacheModel.firstname = getFirstname();
+
+		String firstname = employeeCacheModel.firstname;
+
+		if ((firstname != null) && (firstname.length() == 0)) {
+			employeeCacheModel.firstname = null;
 		}
 
 		employeeCacheModel.patronymic = getPatronymic();
@@ -724,8 +724,8 @@ public class EmployeeModelImpl
 	}
 
 	private long _id;
-	private String _firstname;
 	private String _lastname;
+	private String _firstname;
 	private String _patronymic;
 	private Date _birthdate;
 	private String _gender;
@@ -761,8 +761,8 @@ public class EmployeeModelImpl
 		_columnOriginalValues = new HashMap<String, Object>();
 
 		_columnOriginalValues.put("id_", _id);
-		_columnOriginalValues.put("firstname", _firstname);
 		_columnOriginalValues.put("lastname", _lastname);
+		_columnOriginalValues.put("firstname", _firstname);
 		_columnOriginalValues.put("patronymic", _patronymic);
 		_columnOriginalValues.put("birthdate", _birthdate);
 		_columnOriginalValues.put("gender", _gender);
@@ -792,9 +792,9 @@ public class EmployeeModelImpl
 
 		columnBitmasks.put("id_", 1L);
 
-		columnBitmasks.put("firstname", 2L);
+		columnBitmasks.put("lastname", 2L);
 
-		columnBitmasks.put("lastname", 4L);
+		columnBitmasks.put("firstname", 4L);
 
 		columnBitmasks.put("patronymic", 8L);
 

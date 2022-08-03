@@ -122,9 +122,9 @@ public class EmployeePersistenceTest {
 
 		Employee newEmployee = _persistence.create(pk);
 
-		newEmployee.setFirstname(RandomTestUtil.randomString());
-
 		newEmployee.setLastname(RandomTestUtil.randomString());
+
+		newEmployee.setFirstname(RandomTestUtil.randomString());
 
 		newEmployee.setPatronymic(RandomTestUtil.randomString());
 
@@ -141,9 +141,9 @@ public class EmployeePersistenceTest {
 
 		Assert.assertEquals(existingEmployee.getId(), newEmployee.getId());
 		Assert.assertEquals(
-			existingEmployee.getFirstname(), newEmployee.getFirstname());
-		Assert.assertEquals(
 			existingEmployee.getLastname(), newEmployee.getLastname());
+		Assert.assertEquals(
+			existingEmployee.getFirstname(), newEmployee.getFirstname());
 		Assert.assertEquals(
 			existingEmployee.getPatronymic(), newEmployee.getPatronymic());
 		Assert.assertEquals(
@@ -190,7 +190,7 @@ public class EmployeePersistenceTest {
 
 	protected OrderByComparator<Employee> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"db_Employee", "id", true, "firstname", true, "lastname", true,
+			"db_Employee", "id", true, "lastname", true, "firstname", true,
 			"patronymic", true, "birthdate", true, "gender", true,
 			"positionTypesId", true);
 	}
@@ -401,9 +401,9 @@ public class EmployeePersistenceTest {
 
 		Employee employee = _persistence.create(pk);
 
-		employee.setFirstname(RandomTestUtil.randomString());
-
 		employee.setLastname(RandomTestUtil.randomString());
+
+		employee.setFirstname(RandomTestUtil.randomString());
 
 		employee.setPatronymic(RandomTestUtil.randomString());
 

@@ -70,21 +70,6 @@ public interface EmployeeModel extends BaseModel<Employee> {
 	public void setId(long id);
 
 	/**
-	 * Returns the firstname of this employee.
-	 *
-	 * @return the firstname of this employee
-	 */
-	@AutoEscape
-	public String getFirstname();
-
-	/**
-	 * Sets the firstname of this employee.
-	 *
-	 * @param firstname the firstname of this employee
-	 */
-	public void setFirstname(String firstname);
-
-	/**
 	 * Returns the lastname of this employee.
 	 *
 	 * @return the lastname of this employee
@@ -98,6 +83,21 @@ public interface EmployeeModel extends BaseModel<Employee> {
 	 * @param lastname the lastname of this employee
 	 */
 	public void setLastname(String lastname);
+
+	/**
+	 * Returns the firstname of this employee.
+	 *
+	 * @return the firstname of this employee
+	 */
+	@AutoEscape
+	public String getFirstname();
+
+	/**
+	 * Sets the firstname of this employee.
+	 *
+	 * @param firstname the firstname of this employee
+	 */
+	public void setFirstname(String firstname);
 
 	/**
 	 * Returns the patronymic of this employee.

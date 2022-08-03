@@ -56,4 +56,8 @@ public interface Employee extends EmployeeModel, PersistedModel {
 
 		};
 
+	public String showPosition();
+
+	public String formatDate();
+
 }

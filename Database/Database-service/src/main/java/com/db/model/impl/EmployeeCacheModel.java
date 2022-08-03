@@ -66,10 +66,10 @@ public class EmployeeCacheModel
 
 		sb.append("{id=");
 		sb.append(id);
-		sb.append(", firstname=");
-		sb.append(firstname);
 		sb.append(", lastname=");
 		sb.append(lastname);
+		sb.append(", firstname=");
+		sb.append(firstname);
 		sb.append(", patronymic=");
 		sb.append(patronymic);
 		sb.append(", birthdate=");
@@ -89,18 +89,18 @@ public class EmployeeCacheModel
 
 		employeeImpl.setId(id);
 
-		if (firstname == null) {
-			employeeImpl.setFirstname("");
-		}
-		else {
-			employeeImpl.setFirstname(firstname);
-		}
-
 		if (lastname == null) {
 			employeeImpl.setLastname("");
 		}
 		else {
 			employeeImpl.setLastname(lastname);
+		}
+
+		if (firstname == null) {
+			employeeImpl.setFirstname("");
+		}
+		else {
+			employeeImpl.setFirstname(firstname);
 		}
 
 		if (patronymic == null) {
@@ -134,8 +134,8 @@ public class EmployeeCacheModel
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		id = objectInput.readLong();
-		firstname = objectInput.readUTF();
 		lastname = objectInput.readUTF();
+		firstname = objectInput.readUTF();
 		patronymic = objectInput.readUTF();
 		birthdate = objectInput.readLong();
 		gender = objectInput.readUTF();
@@ -147,18 +147,18 @@ public class EmployeeCacheModel
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(id);
 
-		if (firstname == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(firstname);
-		}
-
 		if (lastname == null) {
 			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(lastname);
+		}
+
+		if (firstname == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(firstname);
 		}
 
 		if (patronymic == null) {
@@ -181,8 +181,8 @@ public class EmployeeCacheModel
 	}
 
 	public long id;
-	public String firstname;
 	public String lastname;
+	public String firstname;
 	public String patronymic;
 	public long birthdate;
 	public String gender;

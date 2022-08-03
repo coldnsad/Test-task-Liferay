@@ -14,8 +14,28 @@
 
 package com.db.model.impl;
 
+import com.db.service.PositionTypeLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author Brian Wing Shun Chan
  */
 public class EmployeeImpl extends EmployeeBaseImpl {
+
+    public String showPosition(){
+        try {
+            return PositionTypeLocalServiceUtil.getPositionType(this.getPositionTypesId()).getName();
+        } catch (PortalException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String formatDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        return sdf.format(this.getBirthdate());
+    }
 }
