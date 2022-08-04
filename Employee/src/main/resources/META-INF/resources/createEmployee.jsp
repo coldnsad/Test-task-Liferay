@@ -1,17 +1,36 @@
 <%@ include file="/init.jsp" %>
+<%@ page import="com.db.model.Employee" %>
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.db.service.EmployeeLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.kernel.exception.PortalException" %>
 
 
-<portlet:actionURL name="saveEmployee" var="saveEmployeeURL"></portlet:actionURL>
+<%
+    long employeeId = ParamUtil.getLong(renderRequest, "employeeId", 0);
+    Employee employee = null;
 
-<h1>Add data to Position Type Table</h1>
+    if (employeeId > 0){
+        try {
+            employee = EmployeeLocalServiceUtil.getEmployee(employeeId);
+        } catch (PortalException e) {
+            throw new RuntimeException(e);
+        }
+    }
+%>
+<portlet:actionURL name="saveEmployee" var="saveEmployeeURL">
+    <portlet:param name="employeeId" value="<%=String.valueOf(employeeId)%>"/>
+</portlet:actionURL>
+
+<h1> Employees </h1>
 <aui:form name="fm" action="${saveEmployeeURL}">
 
-    <aui:input name="lastName"  type="text"></aui:input>
-    <aui:input name="firstName" type="text"></aui:input>
-    <aui:input name="patronymic"  label="Patronymic" type="text"></aui:input>
-    <aui:input name="birthday"  type="date"></aui:input>
+    <aui:model-context bean="<%= employee %>" model="<%= Employee.class %>" />
+    <aui:input name="lastname"></aui:input>
+    <aui:input name="firstname"></aui:input>
+    <aui:input name="patronymic" label="Patronymic"></aui:input>
+    <aui:input name="birthdate"></aui:input>
 
-    <aui:select name="position" label="Position">
+    <aui:select name="positionTypesId" label="Position">
         <c:forEach var="current" items="${positionTypes}">
             <aui:option value="${current.key}">${current.value}</aui:option>
         </c:forEach>

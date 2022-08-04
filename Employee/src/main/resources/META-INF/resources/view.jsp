@@ -22,8 +22,16 @@
         <liferay-ui:search-container-column-text name="birthdate" value="<%= entry.formatDate() %>" />
         <liferay-ui:search-container-column-text property="gender" />
         <liferay-ui:search-container-column-text name="Position" value="<%= entry.showPosition() %>"/>
+        <liferay-ui:search-container-column-text name="Action">
+            <portlet:renderURL var="employeeEditRender">
+                <portlet:param name="mvcRenderCommandName" value="/employee/create"/>
+                <portlet:param name="employeeId" value="${entry.id}"/>
+            </portlet:renderURL>
+            <a href="${employeeEditRender}">Edit</a>
+        </liferay-ui:search-container-column-text>
     </liferay-ui:search-container-row>
     <liferay-ui:search-iterator />
 </liferay-ui:search-container>
 
 <a href="${employeeCreateRender}">Create employee</a>
+
