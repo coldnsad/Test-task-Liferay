@@ -4,6 +4,7 @@
     <portlet:param name="mvcRenderCommandName" value="/employee/create"/>
 </portlet:renderURL>
 
+<h1> List of employees </h1>
 <liferay-ui:search-container
     emptyResultsMessage="there-are-no-employees-yet"
     delta="2" total="${totalEmployees}"

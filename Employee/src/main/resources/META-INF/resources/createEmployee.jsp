@@ -3,7 +3,7 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.db.service.EmployeeLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.kernel.exception.PortalException" %>
-
+<%@ page import="com.liferay.portal.kernel.model.ModelHintsUtil"%>
 
 <%
     long employeeId = ParamUtil.getLong(renderRequest, "employeeId", 0);
@@ -21,14 +21,26 @@
     <portlet:param name="employeeId" value="<%=String.valueOf(employeeId)%>"/>
 </portlet:actionURL>
 
-<h1> Employees </h1>
+<liferay-ui:error key="error-date-message" message="Wrong date input" />
+<h1> Employee creation </h1>
 <aui:form name="fm" action="${saveEmployeeURL}">
 
     <aui:model-context bean="<%= employee %>" model="<%= Employee.class %>" />
-    <aui:input name="lastname"></aui:input>
-    <aui:input name="firstname"></aui:input>
-    <aui:input name="patronymic" label="Patronymic"></aui:input>
-    <aui:input name="birthdate"></aui:input>
+    <aui:input
+        name="lastname"
+        maxLength="<%= ModelHintsUtil.getMaxLength(Employee.class.getName(), \"lastname\") %>"
+        >
+        <aui:validator name="required" />
+    </aui:input>
+    <aui:input name="firstname">
+        <aui:validator name="required" />
+    </aui:input>
+    <aui:input name="patronymic" label="Patronymic">
+        <aui:validator name="required" />
+    </aui:input>
+    <aui:input name="birthdate">
+        <aui:validator name="required" />
+    </aui:input>
 
     <aui:select name="positionTypesId" label="Position">
         <c:forEach var="current" items="${positionTypes}">

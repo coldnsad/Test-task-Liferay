@@ -6,7 +6,11 @@
 		<field name="lastname" type="String" />
 		<field name="firstname" type="String" />
 		<field name="patronymic" type="String" />
-		<field name="birthdate" type="Date" />
+		<field name="birthdate" type="Date">
+			<hint name="year-range-future">false</hint>
+			<hint name="year-range-delta">0</hint>
+			<hint name="show-time">false</hint>
+		</field>
 		<field name="gender" type="String" />
 		<field name="positionTypesId" type="long" />
 	</model>

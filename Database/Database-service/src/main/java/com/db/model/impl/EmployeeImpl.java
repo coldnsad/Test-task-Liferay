@@ -34,7 +34,7 @@ public class EmployeeImpl extends EmployeeBaseImpl {
     }
 
     public String formatDate(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
         return sdf.format(this.getBirthdate());
     }
