@@ -4,6 +4,9 @@
     <portlet:param name="mvcRenderCommandName" value="/employee/create"/>
 </portlet:renderURL>
 
+<portlet:actionURL name="importFromCsv" var="importFromCsvURL">
+</portlet:actionURL>
+
 <h1> List of employees </h1>
 <liferay-ui:search-container
     emptyResultsMessage="there-are-no-employees-yet"
@@ -34,5 +37,16 @@
     <liferay-ui:search-iterator />
 </liferay-ui:search-container>
 
-<a href="${employeeCreateRender}">Create employee</a>
+<a href="${employeeCreateRender}" cssClass="btn bnt-primary">Create employee</a>
+<hr>
+
+<h1>Upload Employee Data CSV </h1>
+<aui:form action="${importFromCsvURL}" enctype="multipart/form-data" method="post" id="csvDataFileForm">
+
+    <aui:input type="file" name="fileupload" id="csvDataFile"></aui:input>
+    <aui:button-row>
+            <aui:button cssClass="btn bnt-primary" type="submit" label="import"/>
+     </aui:button-row>
+
+</aui:form>
 

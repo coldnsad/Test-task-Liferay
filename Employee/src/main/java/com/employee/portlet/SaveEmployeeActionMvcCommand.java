@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import org.osgi.service.component.annotations.Component;
 
 import javax.portlet.*;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +35,8 @@ import java.util.Date;
         service = MVCActionCommand.class
 )
 public class SaveEmployeeActionMvcCommand extends BaseMVCActionCommand {
+
+    private final String SAVE_EMPLOYEE_URL = "http://localhost:8080/web/guest/employee?p_p_id=com_employee_EmployeeControllerPortlet_INSTANCE_oorm&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_employee_EmployeeControllerPortlet_INSTANCE_oorm_mvcRenderCommandName=%2Femployee%2Fcreate&_com_employee_EmployeeControllerPortlet_INSTANCE_oorm_employeeId=";
     @Override
     protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 
@@ -58,12 +61,13 @@ public class SaveEmployeeActionMvcCommand extends BaseMVCActionCommand {
         Date birthdayDate = ParamUtil.getDate(actionRequest, "birthdate", sdf);
 
         System.out.println("-----------------------------------");
-        System.out.println("Date date: " + birthdayDate);
-        System.out.println("String date: " + birthdayString);
+        /*System.out.println("Date date: " + birthdayDate);
+        System.out.println("String date: " + birthdayString);*/
+        //HttpServletRequest r = PortalUtil.getHttpServletRequest(actionRequest);
 
         if (birthdayDate.compareTo(new Date()) > 0) {
             SessionErrors.add(actionRequest, "error-date-message");
-            actionResponse.sendRedirect("http://localhost:8080/web/guest/%D0%A1%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8?p_p_id=com_employee_EmployeeControllerPortlet_INSTANCE_aeca&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_employee_EmployeeControllerPortlet_INSTANCE_aeca_mvcRenderCommandName=%2Femployee%2Fcreate&_com_employee_EmployeeControllerPortlet_INSTANCE_aeca_employeeId=" + employeeId);
+            actionResponse.sendRedirect(SAVE_EMPLOYEE_URL + employeeId);
         }else {
             SessionErrors.clear(actionRequest);
         }
