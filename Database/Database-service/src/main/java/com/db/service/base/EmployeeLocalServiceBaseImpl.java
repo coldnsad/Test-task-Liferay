@@ -17,6 +17,8 @@ package com.db.service.base;
 import com.db.model.Employee;
 import com.db.service.EmployeeLocalService;
 import com.db.service.EmployeeLocalServiceUtil;
+import com.db.service.persistence.ElectroTypePersistence;
+import com.db.service.persistence.ElectronicPersistence;
 import com.db.service.persistence.EmployeePersistence;
 import com.db.service.persistence.PositionTypePersistence;
 
@@ -436,6 +438,12 @@ public abstract class EmployeeLocalServiceBaseImpl
 			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
+
+	@Reference
+	protected ElectronicPersistence electronicPersistence;
+
+	@Reference
+	protected ElectroTypePersistence electroTypePersistence;
 
 	protected EmployeeLocalService employeeLocalService;
 

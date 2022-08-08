@@ -58,4 +58,58 @@
 		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
 	</entity>
 
+	<!--ElectroTypes-->
+	<entity local-service="true" name="ElectroType" remote-service="true" uuid="false">
+
+		<column name="id" primary="true" type="long" />
+		<column name="name" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Field1" return-type="Collection">
+			<finder-column name="name" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+
+	<!--Electronic-->
+	<entity local-service="true" name="Electronic" remote-service="true" uuid="false">
+
+		<column name="id" primary="true" type="long" />
+		<column name="name" type="String" />
+		<column name="etype" type="long" />
+		<column name="price" type="long" />
+		<column name="count" type="int" />
+		<column name="instock" type="boolean" />
+		<column name="archive" type="boolean" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Field1" return-type="Collection">
+			<finder-column name="name" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+
 </service-builder>

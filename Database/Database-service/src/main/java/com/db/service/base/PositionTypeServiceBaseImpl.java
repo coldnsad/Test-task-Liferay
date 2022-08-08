@@ -17,6 +17,8 @@ package com.db.service.base;
 import com.db.model.PositionType;
 import com.db.service.PositionTypeService;
 import com.db.service.PositionTypeServiceUtil;
+import com.db.service.persistence.ElectroTypePersistence;
+import com.db.service.persistence.ElectronicPersistence;
 import com.db.service.persistence.EmployeePersistence;
 import com.db.service.persistence.PositionTypePersistence;
 
@@ -133,6 +135,12 @@ public abstract class PositionTypeServiceBaseImpl
 			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
+
+	@Reference
+	protected ElectronicPersistence electronicPersistence;
+
+	@Reference
+	protected ElectroTypePersistence electroTypePersistence;
 
 	@Reference
 	protected EmployeePersistence employeePersistence;

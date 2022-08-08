@@ -1,6 +1,24 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="com.db.model.Electronic">
+		<field name="id" type="long" />
+		<field name="name" type="String">
+			<hint name="max-length">150</hint>
+		</field>
+		<field name="etype" type="long" />
+		<field name="price" type="long" />
+		<field name="count" type="int" />
+		<field name="instock" type="boolean" />
+		<field name="archive" type="boolean" />
+		<field name="description" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+	</model>
+	<model name="com.db.model.ElectroType">
+		<field name="id" type="long" />
+		<field name="name" type="String" />
+	</model>
 	<model name="com.db.model.Employee">
 		<field name="id" type="long" />
 		<field name="lastname" type="String" />

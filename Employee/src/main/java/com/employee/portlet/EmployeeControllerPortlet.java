@@ -1,9 +1,7 @@
 package com.employee.portlet;
 import com.db.model.Employee;
-import com.db.model.PositionType;
 
 import com.db.service.EmployeeLocalServiceUtil;
-import com.db.service.PositionTypeLocalServiceUtil;
 import com.employee.constants.EmployeeControllerPortletKeys;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;

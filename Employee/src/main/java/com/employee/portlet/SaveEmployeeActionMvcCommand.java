@@ -72,7 +72,7 @@ public class SaveEmployeeActionMvcCommand extends BaseMVCActionCommand {
             SessionErrors.clear(actionRequest);
         }
 
-        Long positionId   = ParamUtil.getLong(actionRequest,   "positionTypesId");
+        long positionId   = ParamUtil.getLong(actionRequest,   "positionTypesId");
         String gender     = ParamUtil.getString(actionRequest, "gender");
 
         if (employeeId > 0) {
