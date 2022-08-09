@@ -1,6 +1,12 @@
+create table db_ElectroEmployee (
+	id_ LONG not null primary key,
+	employeeId LONG,
+	etypeId LONG
+);
+
 create table db_ElectroType (
 	id_ LONG not null primary key,
-	name VARCHAR(75) null
+	name VARCHAR(100) null
 );
 
 create table db_ElectroTypes (
@@ -21,9 +27,9 @@ create table db_Electronic (
 
 create table db_Employee (
 	id_ LONG not null primary key,
-	lastname VARCHAR(75) null,
-	firstname VARCHAR(75) null,
-	patronymic VARCHAR(75) null,
+	lastname VARCHAR(100) null,
+	firstname VARCHAR(100) null,
+	patronymic VARCHAR(100) null,
 	birthdate DATE null,
 	gender VARCHAR(75) null,
 	positionTypesId LONG
@@ -37,6 +43,19 @@ create table db_Employee_PositionTypes (
 );
 
 create table db_PositionType (
+	id_ LONG not null primary key,
+	name VARCHAR(100) null
+);
+
+create table db_Purchase (
+	id_ LONG not null primary key,
+	electronicId LONG,
+	employeeId LONG,
+	purchaseDate DATE null,
+	purchaseTypeId LONG
+);
+
+create table db_PurchaseType (
 	id_ LONG not null primary key,
 	name VARCHAR(75) null
 );

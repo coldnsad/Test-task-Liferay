@@ -112,4 +112,81 @@
 		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
 	</entity>
 
+	<!--ElectroEmployee-->
+	<entity local-service="true" name="ElectroEmployee" remote-service="true" uuid="false">
+
+		<column name="id" primary="true" type="long" />
+		<column name="employeeId" type="long" />
+		<column name="etypeId" type="long" />
+
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Field1" return-type="Collection">
+			<finder-column name="id" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+
+	<!--PurchaseType-->
+	<entity local-service="true" name="PurchaseType" remote-service="true" uuid="false">
+
+		<column name="id" primary="true" type="long" />
+		<column name="name" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Field1" return-type="Collection">
+			<finder-column name="id" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+
+	<!--Purchase-->
+	<entity local-service="true" name="Purchase" remote-service="true" uuid="false">
+
+		<column name="id" primary="true" type="long" />
+		<column name="electronicId" type="long" />
+		<column name="employeeId" type="long" />
+		<column name="purchaseDate" type="Date" />
+		<column name="purchaseTypeId" type="long" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Field1" return-type="Collection">
+			<finder-column name="id" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+
 </service-builder>

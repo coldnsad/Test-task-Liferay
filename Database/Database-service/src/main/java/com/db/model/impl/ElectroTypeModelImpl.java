@@ -83,7 +83,7 @@ public class ElectroTypeModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table db_ElectroType (id_ LONG not null primary key,name VARCHAR(75) null)";
+		"create table db_ElectroType (id_ LONG not null primary key,name VARCHAR(100) null)";
 
 	public static final String TABLE_SQL_DROP = "drop table db_ElectroType";
 

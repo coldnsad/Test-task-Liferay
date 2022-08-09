@@ -17,10 +17,13 @@ package com.db.service.base;
 import com.db.model.PositionType;
 import com.db.service.PositionTypeLocalService;
 import com.db.service.PositionTypeLocalServiceUtil;
+import com.db.service.persistence.ElectroEmployeePersistence;
 import com.db.service.persistence.ElectroTypePersistence;
 import com.db.service.persistence.ElectronicPersistence;
 import com.db.service.persistence.EmployeePersistence;
 import com.db.service.persistence.PositionTypePersistence;
+import com.db.service.persistence.PurchasePersistence;
+import com.db.service.persistence.PurchaseTypePersistence;
 
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -442,6 +445,9 @@ public abstract class PositionTypeLocalServiceBaseImpl
 	}
 
 	@Reference
+	protected ElectroEmployeePersistence electroEmployeePersistence;
+
+	@Reference
 	protected ElectronicPersistence electronicPersistence;
 
 	@Reference
@@ -454,6 +460,12 @@ public abstract class PositionTypeLocalServiceBaseImpl
 
 	@Reference
 	protected PositionTypePersistence positionTypePersistence;
+
+	@Reference
+	protected PurchasePersistence purchasePersistence;
+
+	@Reference
+	protected PurchaseTypePersistence purchaseTypePersistence;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService

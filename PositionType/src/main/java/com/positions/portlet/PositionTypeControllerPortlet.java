@@ -2,6 +2,7 @@ package com.positions.portlet;
 
 import com.db.model.PositionType;
 import com.db.service.PositionTypeLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.positions.constants.PositionTypeControllerPortletKeys;
 
@@ -36,11 +37,21 @@ public class PositionTypeControllerPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		super.doView(renderRequest, renderResponse);
-
-
 	}
-
 	public void savePosition(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
-		System.out.println("Received in the controller(savePosition)");
+
+		String name = ParamUtil.get(actionRequest,"name", "");
+		System.out.println("SaveActionMvcCommand.doProcessAction()\n");
+		System.out.println(name);
+
+		PositionType positionType = PositionTypeLocalServiceUtil.
+				createPositionType(CounterLocalServiceUtil.increment(PositionType.class.getName()));
+		positionType.setName(name);
+
+		//Get all PositionTypes
+		//PositionTypeLocalServiceUtil.getPositionTypes(0, PositionTypeLocalServiceUtil.getPositionTypesCount());
+
+		PositionTypeLocalServiceUtil.addPositionType(positionType);
+		System.out.println("Position type added");
 	}
 }
