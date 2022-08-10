@@ -39,13 +39,13 @@ public class PurchaseControllerPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 
-		int delta = ParamUtil.getInteger(renderRequest, "delta");
-		int currentPage = ParamUtil.getInteger(renderRequest, "cur");
+		/*int delta = ParamUtil.getInteger(renderRequest, "delta");
+		int currentPage = ParamUtil.getInteger(renderRequest, "cur");*/
 
 		//System.out.println(delta + "-" + currentPage);
 
-		int to = delta == 0 ? 2 : currentPage * delta;
-		int from = delta == 0 ? 0 : to - delta;
+		/*int to = delta == 0 ? 2 : currentPage * delta;
+		int from = delta == 0 ? 0 : to - delta;*/
 
 		//System.out.println(from + "-" + to);
 

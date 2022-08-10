@@ -10,7 +10,7 @@
 <h1> List of Purchases </h1>
 <liferay-ui:search-container
     emptyResultsMessage="there-are-no-purchase-yet"
-    delta="2" total="${totalPurchases}"
+    total="${totalPurchases}"
     deltaConfigurable="false">
 
     <liferay-ui:search-container-results results="${purchases}" />
@@ -24,8 +24,6 @@
         <liferay-ui:search-container-column-text
             name="Employee"
             value="<%= entry.showEmployee() %>"
-            orderable="true"
-            orderableProperty="Employee"
             />
         <liferay-ui:search-container-column-text name="Purchase date" value="<%= entry.formatDate() %>"/>
         <liferay-ui:search-container-column-text name="Purchase Type" value="<%= entry.showPurchaseType() %>" />

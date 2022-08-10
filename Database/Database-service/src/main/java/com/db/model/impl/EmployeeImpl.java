@@ -14,6 +14,8 @@
 
 package com.db.model.impl;
 
+import com.db.model.Employee;
+import com.db.service.EmployeeLocalServiceUtil;
 import com.db.service.PositionTypeLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -37,5 +39,9 @@ public class EmployeeImpl extends EmployeeBaseImpl {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
         return sdf.format(this.getBirthdate());
+    }
+
+    public String showEmployee(){
+        return this.getLastname() + " " + this.getFirstname().charAt(0) + "." + " " + this.getPatronymic().charAt(0) + ".";
     }
 }

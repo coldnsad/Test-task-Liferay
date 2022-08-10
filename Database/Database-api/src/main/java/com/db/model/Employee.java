@@ -60,4 +60,6 @@ public interface Employee extends EmployeeModel, PersistedModel {
 
 	public String formatDate();
 
+	public String showEmployee();
+
 }

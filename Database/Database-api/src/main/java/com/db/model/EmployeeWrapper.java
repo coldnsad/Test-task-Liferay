@@ -269,6 +269,11 @@ public class EmployeeWrapper
 	}
 
 	@Override
+	public String showEmployee() {
+		return model.showEmployee();
+	}
+
+	@Override
 	public String showPosition() {
 		return model.showPosition();
 	}
