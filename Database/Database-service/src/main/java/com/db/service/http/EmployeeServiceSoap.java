@@ -14,9 +14,16 @@
 
 package com.db.service.http;
 
+import com.db.service.EmployeeServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * <code>com.db.service.EmployeeServiceUtil</code> service
+ * <code>EmployeeServiceUtil</code> service
  * utility. The static methods of this class call the same methods of the
  * service utility. However, the signatures are different because it is
  * difficult for SOAP to support certain types.
@@ -56,4 +63,23 @@ package com.db.service.http;
  */
 @Deprecated
 public class EmployeeServiceSoap {
+
+	public static com.db.model.EmployeeSoap getEmployee(long id)
+		throws RemoteException {
+
+		try {
+			com.db.model.Employee returnValue = EmployeeServiceUtil.getEmployee(
+				id);
+
+			return com.db.model.EmployeeSoap.toSoapModel(returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(EmployeeServiceSoap.class);
+
 }

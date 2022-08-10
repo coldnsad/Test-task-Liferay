@@ -14,6 +14,10 @@
 
 package com.db.service;
 
+import com.db.model.Employee;
+
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
  * Provides the remote service utility for Employee. This utility wraps
  * <code>com.db.service.impl.EmployeeServiceImpl</code> and is an
@@ -33,13 +37,16 @@ public class EmployeeServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.db.service.impl.EmployeeServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static Employee getEmployee(long id) throws PortalException {
+		return getService().getEmployee(id);
+	}
 
 	/**
 	 * Returns the OSGi service identifier.
 	 *
 	 * @return the OSGi service identifier
 	 */
-	public static java.lang.String getOSGiServiceIdentifier() {
+	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
 	}
 

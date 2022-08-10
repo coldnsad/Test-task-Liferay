@@ -14,10 +14,12 @@
 
 package com.db.service.impl;
 
+import com.db.model.Employee;
 import com.db.service.base.EmployeeServiceBaseImpl;
 
 import com.liferay.portal.aop.AopService;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import org.osgi.service.component.annotations.Component;
 
 /**
@@ -31,4 +33,8 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class EmployeeServiceImpl extends EmployeeServiceBaseImpl {
+
+	public Employee getEmployee(long id) throws PortalException {
+		return employeeLocalService.getEmployee(id);
+	}
 }

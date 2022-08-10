@@ -30,6 +30,13 @@ public class EmployeeServiceWrapper
 		_employeeService = employeeService;
 	}
 
+	@Override
+	public com.db.model.Employee getEmployee(long id)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _employeeService.getEmployee(id);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
