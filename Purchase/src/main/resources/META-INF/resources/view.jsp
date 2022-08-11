@@ -39,3 +39,13 @@
 </liferay-ui:search-container>
 
 <a href="${purchaseCreateRender}" cssClass="btn bnt-primary">Create purchase</a>
+
+<h1>Upload Purchase Data CSV </h1>
+<aui:form action="${importFromCsvURL}" enctype="multipart/form-data" method="post" id="csvDataFileForm">
+
+    <aui:input type="file" name="fileupload" label="CSV or ZIP file required" id="csvDataFile"></aui:input>
+    <aui:button-row>
+            <aui:button cssClass="btn bnt-primary" type="submit" label="import"/>
+     </aui:button-row>
+
+</aui:form>

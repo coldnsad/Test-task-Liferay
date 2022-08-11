@@ -30,4 +30,8 @@ public class ElectronicImpl extends ElectronicBaseImpl {
             throw new RuntimeException(e);
         }
     }
+
+    public String showPriceInRubles(){
+        return String.valueOf(this.getPrice() / 100);
+    }
 }

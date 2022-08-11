@@ -35,8 +35,9 @@
         <c:forEach var="current" items="${electronicTypes}">
             <aui:option value="${current.key}">${current.value}</aui:option>
         </c:forEach>
+        <aui:validator name="required" />
     </aui:select>
-    <aui:input name="price" label="Price"
+    <aui:input name="price" label="Price(in kopecks)"
         maxLength="<%= ModelHintsUtil.getMaxLength(Electronic.class.getName(), \"price\") %>">
         <aui:validator name="required" />
     </aui:input>

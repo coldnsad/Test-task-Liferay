@@ -1,9 +1,7 @@
 package com.rest.application;
 
 import com.db.model.Electronic;
-import com.db.model.Employee;
 import com.db.service.ElectronicLocalServiceUtil;
-import com.db.service.EmployeeLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;

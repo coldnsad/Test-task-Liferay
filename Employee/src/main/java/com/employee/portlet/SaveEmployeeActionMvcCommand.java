@@ -6,6 +6,7 @@ import com.db.service.EmployeeLocalServiceUtil;
 import com.employee.constants.EmployeeControllerPortletKeys;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -26,6 +27,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.liferay.portal.kernel.servlet.taglib.TagDynamicIncludeUtil.include;
+
 @Component(
         immediate = true,
         property = {
@@ -36,7 +39,6 @@ import java.util.Date;
 )
 public class SaveEmployeeActionMvcCommand extends BaseMVCActionCommand {
 
-    private final String SAVE_EMPLOYEE_URL = "http://localhost:8080/web/guest/employee?p_p_id=com_employee_EmployeeControllerPortlet_INSTANCE_oorm&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_employee_EmployeeControllerPortlet_INSTANCE_oorm_mvcRenderCommandName=%2Femployee%2Fcreate&_com_employee_EmployeeControllerPortlet_INSTANCE_oorm_employeeId=";
     @Override
     protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 
@@ -44,6 +46,19 @@ public class SaveEmployeeActionMvcCommand extends BaseMVCActionCommand {
 
         SessionMessages.add(actionRequest, ((LiferayPortletConfig)portletConfig).getPortletId() + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
         saveEmployee(actionRequest, actionResponse);
+    }
+
+    private PortletURL createRedirectURL(ActionRequest actionRequest, long epmployeeId) {
+        ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+        String portletName = (String) actionRequest.getAttribute(WebKeys.PORTLET_ID);
+
+        PortletURL redirectURL = PortletURLFactoryUtil.create(
+                actionRequest, portletName, themeDisplay.getLayout().getPlid(), PortletRequest.RENDER_PHASE);
+        redirectURL.setParameter("mvcRenderCommandName", "/employee/create");
+        redirectURL.setParameter("employeeId", String.valueOf(epmployeeId)); // note the changed parameter name
+
+        return redirectURL;
     }
 
     public void saveEmployee(ActionRequest actionRequest, ActionResponse actionResponse) throws ParseException, IOException {
@@ -67,7 +82,10 @@ public class SaveEmployeeActionMvcCommand extends BaseMVCActionCommand {
 
         if (birthdayDate.compareTo(new Date()) > 0) {
             SessionErrors.add(actionRequest, "error-date-message");
-            actionResponse.sendRedirect(SAVE_EMPLOYEE_URL + employeeId);
+            //actionResponse.sendRedirect(SAVE_EMPLOYEE_URL + employeeId);
+            System.out.println("Redirect to " + createRedirectURL(actionRequest, employeeId));
+            actionResponse.sendRedirect(createRedirectURL(actionRequest, employeeId).toString());
+            return;
         }else {
             SessionErrors.clear(actionRequest);
         }
@@ -93,4 +111,6 @@ public class SaveEmployeeActionMvcCommand extends BaseMVCActionCommand {
 
         System.out.println(firstName + " - " + lastName + " - " + patronymic + " - " + sdf.format(birthdayDate) + " - " + positionId+ " - " + gender);
     }
+
+
 }

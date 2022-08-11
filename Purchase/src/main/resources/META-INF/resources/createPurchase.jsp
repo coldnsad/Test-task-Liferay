@@ -34,15 +34,19 @@
         <c:forEach var="current" items="${electronics}">
             <aui:option value="${current.key}">${current.value}</aui:option>
         </c:forEach>
+        <aui:validator name="required" />
     </aui:select>
 
     <aui:select name="employeeId" label="Employee">
         <c:forEach var="current" items="${employees}">
             <aui:option value="${current.key}">${current.value}</aui:option>
         </c:forEach>
+        <aui:validator name="required" />
     </aui:select>
 
-     <aui:input name="purchaseDate">
+     <aui:input
+        name="purchaseDate"
+        maxLength="<%= ModelHintsUtil.getMaxLength(Purchase.class.getName(), \"purchaseDate\") %>">
         <aui:validator name="required" />
     </aui:input>
 
@@ -50,6 +54,7 @@
         <c:forEach var="current" items="${purchaseTypes}">
             <aui:option value="${current.key}">${current.value}</aui:option>
         </c:forEach>
+        <aui:validator name="required" />
     </aui:select>
 
     <aui:button-row>

@@ -64,9 +64,8 @@ public class StatisticControllerPortlet extends MVCPortlet {
 
 		String[] outputArray = new String[1];
 		//ID category TV And Smartphones
-		DynamicQuery queryTVId = DynamicQueryFactoryUtil.forClass(ElectroType.class, "electroType",
-				PortalClassLoaderUtil.getClassLoader());
-		queryTVId.add(RestrictionsFactoryUtil.like("electroType.name", "TV"));
+		DynamicQuery queryTVId = ElectroTypeLocalServiceUtil.dynamicQuery();
+		queryTVId.add(RestrictionsFactoryUtil.like("name", "TV"));
 		List<ElectroType> electroTypeList = ElectroEmployeeLocalServiceUtil.dynamicQuery(queryTVId);
 
 
@@ -75,9 +74,8 @@ public class StatisticControllerPortlet extends MVCPortlet {
 			tvId = electroTypeList.get(0).getId();
 		}
 
-		DynamicQuery querySmartphoneId = DynamicQueryFactoryUtil.forClass(ElectroType.class, "electroType",
-				PortalClassLoaderUtil.getClassLoader());
-		querySmartphoneId.add(RestrictionsFactoryUtil.like("electroType.name", "Smartphones"));
+		DynamicQuery querySmartphoneId = ElectroTypeLocalServiceUtil.dynamicQuery();
+		querySmartphoneId.add(RestrictionsFactoryUtil.like("name", "Smartphones"));
 		electroTypeList = ElectroEmployeeLocalServiceUtil.dynamicQuery(querySmartphoneId);
 
 		long smartphonesId = 0;
@@ -103,25 +101,24 @@ public class StatisticControllerPortlet extends MVCPortlet {
 		}
 
 
-		outputArray[0] = result + "р.";
+		outputArray[0] = result / 100 + "rub";
 
 		return outputArray;
 	}
 	private String[] getAmountOfPurchasesPaidByCard() throws PortalException {
 
-		String[] outputArray = new String[2];
+		String[] outputArray = new String[1];
 
 		//ID category Card
-		DynamicQuery queryPurchaseTypeId = DynamicQueryFactoryUtil.forClass(PurchaseType.class, "purchaseType",
-				PortalClassLoaderUtil.getClassLoader());
-		queryPurchaseTypeId.add(RestrictionsFactoryUtil.like("purchaseType.name", "Card"));
+		DynamicQuery queryPurchaseTypeId = PurchaseTypeLocalServiceUtil.dynamicQuery();
+		queryPurchaseTypeId.add(RestrictionsFactoryUtil.like("name", "Card"));
 		List<PurchaseType> purchaseTypeList = PurchaseTypeLocalServiceUtil.dynamicQuery(queryPurchaseTypeId);
 
 		long cardPurchaseId = 0;
 		if(purchaseTypeList.size() != 0) {
 			cardPurchaseId = purchaseTypeList.get(0).getId();
 		}else{
-			outputArray[0] = "0р.";
+			outputArray[0] = "0rub";
 		}
 
 		//Purchases paid by a card
@@ -145,7 +142,7 @@ public class StatisticControllerPortlet extends MVCPortlet {
 		}
 
 
-		outputArray[0] = result + "р.";
+		outputArray[0] = result / 100 + "rub";
 
 		return outputArray;
 	}
@@ -169,9 +166,8 @@ public class StatisticControllerPortlet extends MVCPortlet {
 
 
 		//ID category TV
-		DynamicQuery queryElectroId = DynamicQueryFactoryUtil.forClass(ElectroType.class, "electroType",
-				PortalClassLoaderUtil.getClassLoader());
-		queryElectroId.add(RestrictionsFactoryUtil.like("electroType.name", "TV"));
+		DynamicQuery queryElectroId = ElectroTypeLocalServiceUtil.dynamicQuery();
+		queryElectroId.add(RestrictionsFactoryUtil.like("name", "TV"));
 		List<ElectroType> electroTypeList = ElectroEmployeeLocalServiceUtil.dynamicQuery(queryElectroId);
 
 		long tvId = 0;
@@ -182,7 +178,7 @@ public class StatisticControllerPortlet extends MVCPortlet {
 			System.out.println("-------------------------------");
 		}else{
 			outputArray[0] = "There is no the best TV seller this month";
-			outputArray[1] = "0р";
+			outputArray[1] = "0rub";
 			return outputArray;
 		}
 
@@ -241,16 +237,16 @@ public class StatisticControllerPortlet extends MVCPortlet {
 				max = pair.getValue();
 				bestSeller = pair.getKey();
 			}
-			System.out.println("Name: " + pair.getKey().getLastname() + ";" + "Amount(rubles): " + pair.getValue());
+			System.out.println("Name: " + pair.getKey().getLastname() + ";" + "Amount(kopecs): " + pair.getValue());
 		}
 
 		if (bestSeller != null) {
 			outputArray[0] = bestSeller.showEmployee();
-			outputArray[1] = max + "р.";
+			outputArray[1] = max / 100 + "rub";
 		}
 		else{
 			outputArray[0] = "There is no the best TV seller this month";
-			outputArray[1] = "0р";
+			outputArray[1] = "rub";
 		}
 		return outputArray;
 	}

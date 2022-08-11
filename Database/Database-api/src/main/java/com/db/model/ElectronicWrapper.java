@@ -315,6 +315,11 @@ public class ElectronicWrapper
 	}
 
 	@Override
+	public String showPriceInRubles() {
+		return model.showPriceInRubles();
+	}
+
+	@Override
 	protected ElectronicWrapper wrap(Electronic electronic) {
 		return new ElectronicWrapper(electronic);
 	}

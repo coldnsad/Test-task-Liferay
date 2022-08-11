@@ -72,7 +72,7 @@ public class EmployeeControllerPortlet extends MVCPortlet {
 		if (!validateFile(file)) System.out.println("Wrong format");
 	}
 
-	private static boolean validateFile(File file) throws ParseException, IOException {
+	public static boolean validateFile(File file) throws ParseException, IOException {
 
 		String fileExtension = getFileExtension(file);
 		if (fileExtension.equals("csv")) {
@@ -160,6 +160,10 @@ public class EmployeeControllerPortlet extends MVCPortlet {
 		else return "";
 	}
 
+	public static String getFileRawName(String fileName) {
+		return fileName.substring(0, fileName.lastIndexOf(".")).toLowerCase();
+	}
+
 	private static void getFilesFromZip(File file) throws IOException, ParseException {
 		byte[] buffer = new byte[2048];
 
@@ -180,6 +184,12 @@ public class EmployeeControllerPortlet extends MVCPortlet {
 			ZipEntry entry;
 			while ((entry = stream.getNextEntry()) != null) {
 
+
+				//Check on right name of file according to table in db
+				if(!getFileRawName(entry.getName()).equals("employee")){
+					System.out.println(getFileRawName(entry.getName()));
+					continue;
+				}
 				Path filePath = outDir.resolve(entry.getName());
 
 				try (FileOutputStream fos = new FileOutputStream(filePath.toFile());
@@ -198,9 +208,7 @@ public class EmployeeControllerPortlet extends MVCPortlet {
 		}
 
 		for (final File fileEntry : directoryForCsv.listFiles()) {
-			if (fileEntry.isDirectory()) {
-				continue;
-			} else {
+			if (!fileEntry.isDirectory()) {
 				validateFile(fileEntry);
 			}
 		}

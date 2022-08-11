@@ -1,31 +1,28 @@
 package com.purchase.portlet;
 
-
 import com.db.model.ElectroEmployee;
 import com.db.model.Electronic;
-import com.db.model.Employee;
 import com.db.model.Purchase;
 import com.db.service.*;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
+import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.purchase.constants.PurchaseControllerPortletKeys;
 import org.osgi.service.component.annotations.Component;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
+import javax.portlet.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,8 +37,6 @@ import java.util.List;
         service = MVCActionCommand.class
 )
 public class savePurchaseMvcActionCommand extends BaseMVCActionCommand {
-
-    private final String SAVE_PURCHASE_URL = "http://localhost:8080/web/guest/purchases?p_p_id=com_purchase_PurchaseControllerPortlet_INSTANCE_cnjk&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_purchase_PurchaseControllerPortlet_INSTANCE_cnjk_mvcRenderCommandName=%2Fpurchase%2Fcreate";
     private int errors;
     @Override
     protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
@@ -50,6 +45,19 @@ public class savePurchaseMvcActionCommand extends BaseMVCActionCommand {
         SessionMessages.add(actionRequest, ((LiferayPortletConfig)portletConfig).getPortletId() + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
 
         savePurchase(actionRequest, actionResponse);
+    }
+
+    private PortletURL createRedirectURL(ActionRequest actionRequest, long purchaseId) {
+        ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+        String portletName = (String) actionRequest.getAttribute(WebKeys.PORTLET_ID);
+
+        PortletURL redirectURL = PortletURLFactoryUtil.create(
+                actionRequest, portletName, themeDisplay.getLayout().getPlid(), PortletRequest.RENDER_PHASE);
+        redirectURL.setParameter("mvcRenderCommandName", "/purchase/create");
+        redirectURL.setParameter("purchaseId", String.valueOf(purchaseId)); // note the changed parameter name
+
+        return redirectURL;
     }
 
     private void savePurchase(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortalException {
@@ -70,18 +78,19 @@ public class savePurchaseMvcActionCommand extends BaseMVCActionCommand {
         int electronicCount = chosenElectronic.getCount();
 
         //SELECT * from ElectroEmployee WHERE (ElectroEmployee.employeeID = employeeId) AND (ElectroEmployee.etype = electronicTypeId)
-        DynamicQuery userQuery = DynamicQueryFactoryUtil.forClass(ElectroEmployee.class, "electroEmployee",
-                PortalClassLoaderUtil.getClassLoader());
+        DynamicQuery userQuery = ElectroEmployeeLocalServiceUtil.dynamicQuery();
         userQuery.add(RestrictionsFactoryUtil.and
                 (
-                RestrictionsFactoryUtil.eq("electroEmployee.employeeId", employeeId),
-                RestrictionsFactoryUtil.eq("electroEmployee.etypeId", electronicTypeId))
+                RestrictionsFactoryUtil.eq("employeeId", employeeId),
+                RestrictionsFactoryUtil.eq("etypeId", electronicTypeId))
                 );
 
         //Date check
         if (purchaseDate.compareTo(new Date()) > 0) {
             SessionErrors.add(actionRequest, "error-date-message");
-            actionResponse.sendRedirect(SAVE_PURCHASE_URL);
+            //actionResponse.sendRedirect(SAVE_PURCHASE_URL);
+            System.out.println("Redirect to " + createRedirectURL(actionRequest, purchaseId));
+            actionResponse.sendRedirect(createRedirectURL(actionRequest, purchaseId).toString());
             errors++;
             return;
         }
@@ -96,7 +105,9 @@ public class savePurchaseMvcActionCommand extends BaseMVCActionCommand {
 
             if (electroEmployee.size() < 1) {
                 SessionErrors.add(actionRequest, "error-employee-message");
-                actionResponse.sendRedirect(SAVE_PURCHASE_URL);
+                //actionResponse.sendRedirect(SAVE_PURCHASE_URL);
+                System.out.println("Redirect to " + createRedirectURL(actionRequest, purchaseId));
+                actionResponse.sendRedirect(createRedirectURL(actionRequest, purchaseId).toString());
                 errors++;
                 return;
             }
@@ -107,7 +118,9 @@ public class savePurchaseMvcActionCommand extends BaseMVCActionCommand {
         //Electronic count check
         if (electronicCount < 1) {
             SessionErrors.add(actionRequest, "error-electronic-count-message");
-            actionResponse.sendRedirect(SAVE_PURCHASE_URL);
+            //actionResponse.sendRedirect(SAVE_PURCHASE_URL);
+            System.out.println("Redirect to " + createRedirectURL(actionRequest, purchaseId));
+            actionResponse.sendRedirect(createRedirectURL(actionRequest, purchaseId).toString());
             errors++;
             return;
         }

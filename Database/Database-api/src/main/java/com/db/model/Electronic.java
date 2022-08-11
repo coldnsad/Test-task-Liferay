@@ -58,4 +58,6 @@ public interface Electronic extends ElectronicModel, PersistedModel {
 
 	public String showElectronicType();
 
+	public String showPriceInRubles();
+
 }

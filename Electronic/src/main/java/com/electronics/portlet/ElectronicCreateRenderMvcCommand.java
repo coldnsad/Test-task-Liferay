@@ -2,6 +2,7 @@ package com.electronics.portlet;
 
 
 import com.db.model.ElectroType;
+import com.db.model.Electronic;
 import com.db.model.PositionType;
 import com.db.service.ElectroTypeLocalServiceUtil;
 import com.db.service.PositionTypeLocalServiceUtil;

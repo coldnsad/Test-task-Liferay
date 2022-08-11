@@ -32,13 +32,20 @@
         >
         <aui:validator name="required" />
     </aui:input>
-    <aui:input name="firstname">
+    <aui:input
+        name="firstname"
+        maxLength="<%= ModelHintsUtil.getMaxLength(Employee.class.getName(), \"firstname\") %>">
         <aui:validator name="required" />
     </aui:input>
-    <aui:input name="patronymic" label="Patronymic">
+    <aui:input
+        name="patronymic"
+        label="Patronymic"
+        maxLength="<%= ModelHintsUtil.getMaxLength(Employee.class.getName(), \"patronymic\") %>">
         <aui:validator name="required" />
     </aui:input>
-    <aui:input name="birthdate">
+    <aui:input
+        name="birthdate"
+        maxLength="<%= ModelHintsUtil.getMaxLength(Employee.class.getName(), \"birthdate\") %>">
         <aui:validator name="required" />
     </aui:input>
 
@@ -46,6 +53,7 @@
         <c:forEach var="current" items="${positionTypes}">
             <aui:option value="${current.key}">${current.value}</aui:option>
         </c:forEach>
+        <aui:validator name="required" />
     </aui:select>
 
      <aui:select name="gender" label="Gender">

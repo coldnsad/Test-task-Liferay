@@ -21,8 +21,8 @@
         escapedModel="<%=true%>">
 
         <liferay-ui:search-container-column-text property="name"  />
-        <liferay-ui:search-container-column-text name="etype" value="<%= entry.showElectronicType() %>"/>
-        <liferay-ui:search-container-column-text property="price" />
+        <liferay-ui:search-container-column-text name="Electronic type" value="<%= entry.showElectronicType() %>"/>
+        <liferay-ui:search-container-column-text name="Price" value="<%= entry.showPriceInRubles() %>" />
         <liferay-ui:search-container-column-text property="count" />
         <liferay-ui:search-container-column-text name="instock" />
         <liferay-ui:search-container-column-text property="archive" />
@@ -41,10 +41,10 @@
 <a href="${electronicCreateRender}" cssClass="btn bnt-primary">Create electronic</a>
 <hr>
 
-<h1>Upload Employee Data CSV </h1>
+<h1>Upload Electronic Data CSV </h1>
 <aui:form action="${importFromCsvURL}" enctype="multipart/form-data" method="post" id="csvDataFileForm">
 
-    <aui:input type="file" name="fileupload" id="csvDataFile"></aui:input>
+    <aui:input type="file" name="fileupload" label="CSV or ZIP file required" id="csvDataFile"></aui:input>
     <aui:button-row>
             <aui:button cssClass="btn bnt-primary" type="submit" label="import"/>
      </aui:button-row>
