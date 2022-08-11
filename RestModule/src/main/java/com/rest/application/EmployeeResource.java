@@ -4,6 +4,8 @@ import com.db.model.Employee;
 import com.db.service.EmployeeLocalServiceUtil;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import java.util.List;
 
@@ -12,19 +14,23 @@ public class EmployeeResource {
 
     @GET
     @Produces("application/json")
-    public String getAllPeople() {
+    public String getAllEmployees() {
         List<Employee> employees = EmployeeLocalServiceUtil.getEmployees(0, EmployeeLocalServiceUtil.getEmployeesCount());
         return JSONFactoryUtil.serialize(employees);
     }
 
-    /*@GET
+    @GET
     @Path("{id}")
     @Produces("application/json")
-    public Response getEmployee(@PathParam("id") String id) {
-        // Implementation
+    public String getEmployee(@PathParam("id") String id) {
+        try {
+            return JSONFactoryUtil.serialize(EmployeeLocalServiceUtil.getEmployee(Long.parseLong(id)));
+        } catch (com.liferay.portal.kernel.exception.PortalException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @POST
+    /*@POST
     @Consumes("application/json")
     @Produces("application/json")
     public Employee addEmployee(Employee newEmployee) {

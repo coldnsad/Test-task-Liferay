@@ -34,7 +34,9 @@ public class RestApplication extends Application {
 		singletons.add(new JacksonJsonProvider());
 
 		// add Employee REST endpoints (resources)
+		singletons.add(this);
 		singletons.add(new EmployeeResource());
+		singletons.add(new ElectronicResource());
 		return singletons;
 		//return Collections.<Object>singleton(this);
 	}
